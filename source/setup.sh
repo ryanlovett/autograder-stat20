@@ -3,9 +3,12 @@
 # exit if any step fails
 set -e
 
+# libicu-dev is for stringi
+
 apt update && \
     apt -y install \
         git \
+        libicu-dev \
         littler \
         r-base-core \
         r-cran-bookdown \
