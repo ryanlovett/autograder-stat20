@@ -1,3 +1,49 @@
-#!/bin/sh
+#!/usr/bin/python
 
-true
+# This script must produce /autograder/results/results.json
+
+import glob
+import json
+import os
+
+def write_results(results, filename):
+    f = open(filename)
+    json.dump(results, f)
+    f.flush()
+    f.close()
+
+input_path = '/autograder/submission'
+output_file = '/autograder/results/results.json'
+
+
+print(f"Contents of {input_path}")
+print(glob.glob(os.path.join(input_path, '*')))
+
+results = {
+    'score': 44.0,
+    'execution_time': 136,
+    'output': 'Text relevant to the entire submission',
+    'visibility': 'after_due_date',
+    'stdout_visibility': 'visible',
+    'extra_data': {},
+    'tests': [
+        {
+            'score': 2.0,
+            'max_score': 2.0,
+            'status': 'passed',
+            'name': 'Your name here',
+            'number': '1.1',
+            'output': 'Giant multiline string that will be placed in a <pre> tag and collapsed by default',
+            'tags': ['tag1', 'tag2', 'tag3'],
+            'visibility': 'visible',
+            'extra_data': {}
+        }
+    ],
+    'leaderboard': [
+        {'name': 'Accuracy', 'value': 0.926},
+        {'name': 'Time', 'value': 15.1, 'order': 'asc'},
+        {'name': 'Stars', 'value': '*****'}
+    ]
+}
+
+write_results(results, output_file)
